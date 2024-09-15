@@ -1,0 +1,14 @@
+name: build
+
+on: 
+  # push: 
+  #   branches:
+  #     - master
+  #schedule:
+  #  - cron: 30 18 * * *
+  workflow_dispatch:
+    inputs:
+      param:
+        description: 'parameter'
+        required: false
+        default: ''
