@@ -90,7 +90,7 @@ jobs:
     - name: 自定义操作
       run: |
         cd lede
-        sed -i 's/PKG_HASH.*/PKG_HASH:=skip/' feeds/packages/utils/containerd/Makefile
+        # sed -i 's/PKG_HASH.*/PKG_HASH:=skip/' feeds/packages/utils/containerd/Makefile
         
     - name: 下载 dl 库，编译固件 （-j 后面是线程数，第一次编译推荐用单线程）
       run: |
