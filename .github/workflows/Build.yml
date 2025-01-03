@@ -50,7 +50,7 @@ jobs:
       with:
           ccache: 'true'
           mixkey: 'rpi3'
-          prefix: 'openwrt'
+          prefix: 'lede'
 
     - name: 更新 feeds
       run: |
