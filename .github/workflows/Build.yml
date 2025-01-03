@@ -41,9 +41,19 @@ jobs:
         python3 python3-pyelftools python3-setuptools qemu-utils rsync scons squashfs-tools subversion \
         swig texinfo uglifyjs upx-ucl unzip vim wget xmlto xxd zlib1g-dev
         
-    - name: 下载源代码，更新 feeds 并
+    - name: 下载源代码
       run: |
         git clone https://github.com/coolsnowwolf/lede
+
+    - name: Cache
+      uses: stupidloud/cachewrtbuild@main
+      with:
+          ccache: 'true'
+          mixkey: 'rpi3'
+          prefix: 'openwrt'
+
+    - name: 更新 feeds
+      run: |
         cd lede
         ./scripts/feeds update -a
         ./scripts/feeds install -a
