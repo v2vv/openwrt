@@ -19,6 +19,9 @@ on:
           - "false"
 
 env:
+  CONFIG_FILE: 111.config
+  DIY_P1_SH: diy-part1.sh
+  DIY_P2_SH: diy-part2.sh
   TZ: Asia/Shanghai
 
 jobs:
@@ -72,6 +75,13 @@ jobs:
           mixkey: 'rpi3'
           prefix: 'lede'
 
+    - name: Load custom feeds
+      run: |
+        # [ -e $FEEDS_CONF ] && mv $FEEDS_CONF lede/feeds.conf.default
+        chmod +x $DIY_P1_SH
+        cd lede
+        $GITHUB_WORKSPACE/$DIY_P1_SH
+
     - name: 更新 feeds
       run: |
         cd lede
@@ -85,12 +95,15 @@ jobs:
     - name: 复制仓库配置
       if: ${{ inputs.setup_tmate == 'false' }}
       run: |
-        sudo cp "${{ github.workspace }}/111.config" ./lede/.config
-        
-    - name: 自定义操作
+        sudo cp "${{ github.workspace }}/$CONFIG_FILE" ./lede/.config
+
+    - name: Load custom configuration
       run: |
+        # [ -e files ] && mv files openwrt/files
+        # [ -e $CONFIG_FILE ] && mv $CONFIG_FILE lede/.config
+        chmod +x $DIY_P2_SH
         cd lede
-        # sed -i 's/PKG_HASH.*/PKG_HASH:=skip/' feeds/packages/utils/containerd/Makefile
+        $GITHUB_WORKSPACE/$DIY_P2_SH
         
     - name: 下载 dl 库，编译固件 （-j 后面是线程数，第一次编译推荐用单线程）
       run: |
