@@ -70,6 +70,7 @@ jobs:
     - name: 下载 dl 库，编译固件 （-j 后面是线程数，第一次编译推荐用单线程）
       run: |
         cd lede
+        sudo chmod -R 777 .
         make defconfig
         make download -j8
         make -j$(nproc) || make -j1 || make -j1 V=s
