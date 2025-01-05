@@ -99,10 +99,10 @@ jobs:
 
     - name: 准备配置文件
       run: |
-        sudo mkdir -p upload
-        sudo cp ./lede/.config ./upload/config.txt
+        mkdir -p upload
+        cp ./lede/.config ./upload/config.txt
         cd upload
-        sudo "CONFIG=$PWD" >> $GITHUB_ENV
+        echo "CONFIG=$PWD" >> $GITHUB_ENV
 
     - name: Upload config
       uses: actions/upload-artifact@main
