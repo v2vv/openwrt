@@ -32,19 +32,6 @@ jobs:
     - name: Checkout
       uses: actions/checkout@main
 
-    - name: 准备配置文件
-      run: |
-        echo hhh > .config
-        ls -a
-        
-
-    - name: Upload config
-      uses: actions/upload-artifact@main
-      with:
-        include-hidden-files: true
-        name: OpenWrt_firmware_${{ env.FILE_DATE }}_config
-        path: .config
-
     - name: Free disk space
       uses: jlumbroso/free-disk-space@main
       with:
