@@ -97,11 +97,15 @@ jobs:
       run: |
         sudo cp "${{ github.workspace }}/$CONFIG_FILE" ./lede/.config
 
+    - name: 准备配置文件
+      run: |
+        sudo cp ./lede/.config ./config.txt
+
     - name: Upload config
       uses: actions/upload-artifact@main
       with:
         name: OpenWrt_firmware_${{ env.FILE_DATE }}_config
-        path: ${{ github.workspace }}/lede/.config
+        path: ./config.txt
 
     - name: Load custom configuration
       run: |
