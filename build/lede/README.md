@@ -5,3 +5,8 @@
   - alist
   - ddns-go
   - nano
+## diy history
+### static ip
+192.168.1.55
+### default theme
+luci-theme-argon
