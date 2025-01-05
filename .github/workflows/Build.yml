@@ -101,7 +101,7 @@ jobs:
       run: |
         sudo mkdir -p upload
         sudo cp ./lede/.config ./upload/config.txt
-        sudo cd upload
+        cd upload
         sudo "CONFIG=$PWD" >> $GITHUB_ENV
 
     - name: Upload config
