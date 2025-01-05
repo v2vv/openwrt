@@ -87,6 +87,14 @@ jobs:
         cd lede
         ./scripts/feeds update -a
         ./scripts/feeds install -a
+
+    - name: Load custom configuration
+      run: |
+        # [ -e files ] && mv files openwrt/files
+        # [ -e $CONFIG_FILE ] && mv $CONFIG_FILE lede/.config
+        chmod +x $DIY_P2_SH
+        cd lede
+        $GITHUB_WORKSPACE/$DIY_P2_SH
         
     - name: Setup tmate session
       if: ${{ inputs.setup_tmate == 'true' }}
@@ -109,14 +117,6 @@ jobs:
       with:
         name: OpenWrt_firmware_${{ env.FILE_DATE }}_config
         path: ${{ env.CONFIG }}
-
-    - name: Load custom configuration
-      run: |
-        # [ -e files ] && mv files openwrt/files
-        # [ -e $CONFIG_FILE ] && mv $CONFIG_FILE lede/.config
-        chmod +x $DIY_P2_SH
-        cd lede
-        $GITHUB_WORKSPACE/$DIY_P2_SH
         
     - name: 下载 dl 库，编译固件 （-j 后面是线程数，第一次编译推荐用单线程）
       run: |
