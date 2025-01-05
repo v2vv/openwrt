@@ -34,14 +34,15 @@ jobs:
 
     - name: 准备配置文件
       run: |
-        echo hhh > .config
+        echo hhh > config.txt
+        ls
         
 
     - name: Upload config
       uses: actions/upload-artifact@main
       with:
         name: OpenWrt_firmware_${{ env.FILE_DATE }}_config
-        path: .config
+        path: config.txt
 
     - name: Free disk space
       uses: jlumbroso/free-disk-space@main
