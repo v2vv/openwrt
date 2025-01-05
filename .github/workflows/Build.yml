@@ -99,13 +99,16 @@ jobs:
 
     - name: 准备配置文件
       run: |
-        sudo cp ./lede/.config ./config.txt
+        sudo mkdir -p upload
+        sudo cp ./lede/.config ./upload/config.txt
+        sudo cd upload
+        sudo "CONFIG=$PWD" >> $GITHUB_ENV
 
     - name: Upload config
       uses: actions/upload-artifact@main
       with:
         name: OpenWrt_firmware_${{ env.FILE_DATE }}_config
-        path: ./config.txt
+        path: ${{ env.CONFIG }}
 
     - name: Load custom configuration
       run: |
