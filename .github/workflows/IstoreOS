@@ -57,7 +57,7 @@ jobs:
         
     - name: 下载源代码
       run: |
-        git clone https://github.com/coolsnowwolf/lede
+        git clone -b istoreos-24.10 https://github.com/istoreos/istoreos
 
     - name: Free up disk space
       env:
