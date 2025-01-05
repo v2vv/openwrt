@@ -19,7 +19,7 @@ on:
           - "false"
 
 env:
-  CONFIG_FILE: 111.config
+  CONFIG_FILE: config/lede/2025_01_05.config
   DIY_P1_SH: diy-part1.sh
   DIY_P2_SH: diy-part2.sh
   TZ: Asia/Shanghai
