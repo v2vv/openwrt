@@ -32,6 +32,17 @@ jobs:
     - name: Checkout
       uses: actions/checkout@main
 
+    - name: 准备配置文件
+      run: |
+        echo hhh > .config
+        
+
+    - name: Upload config
+      uses: actions/upload-artifact@main
+      with:
+        name: OpenWrt_firmware_${{ env.FILE_DATE }}_config
+        path: .config
+
     - name: Free disk space
       uses: jlumbroso/free-disk-space@main
       with:
@@ -99,12 +110,10 @@ jobs:
 
     - name: 准备配置文件
       run: |
-        cp ./lede/.config ./lede/config.txt
-        echo "CONFIG=$PWD/lede/config.txt" >> $GITHUB_ENV
-        # mkdir -p upload
-        # cp ./lede/.config ./upload/config.txt
-        # cd upload
-        # echo "CONFIG=$PWD" >> $GITHUB_ENV
+        mkdir -p upload
+        cp ./lede/.config ./upload/config.txt
+        cd upload
+        echo "CONFIG=$PWD" >> $GITHUB_ENV
 
     - name: Upload config
       uses: actions/upload-artifact@main
