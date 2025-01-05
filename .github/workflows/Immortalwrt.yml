@@ -64,36 +64,36 @@ jobs:
         DEBIAN_FRONTEND: noninteractive
       run: |
         sudo mkdir -p -m 777 /mnt/openwrt/dl /mnt/openwrt/staging_dir /mnt/openwrt/build_dir
-        ln -sf /mnt/openwrt/dl lede/dl
-        ln -sf /mnt/openwrt/staging_dir lede/staging_dir
-        ln -sf /mnt/openwrt/build_dir lede/build_dir
+        ln -sf /mnt/openwrt/dl immortalwrt/dl
+        ln -sf /mnt/openwrt/staging_dir immortalwrt/staging_dir
+        ln -sf /mnt/openwrt/build_dir immortalwrt/build_dir
 
     - name: Cache
       uses: stupidloud/cachewrtbuild@main
       with:
           ccache: 'true'
-          mixkey: 'rpi3'
-          prefix: 'lede'
+          mixkey: 'rootf'
+          prefix: 'immortalwrt'
 
     - name: Load custom feeds
       run: |
-        # [ -e $FEEDS_CONF ] && mv $FEEDS_CONF lede/feeds.conf.default
+        # [ -e $FEEDS_CONF ] && mv $FEEDS_CONF immortalwrt/feeds.conf.default
         chmod +x $DIY_P1_SH
-        cd lede
+        cd immortalwrt
         $GITHUB_WORKSPACE/$DIY_P1_SH
 
     - name: 更新 feeds
       run: |
-        cd lede
+        cd immortalwrt
         ./scripts/feeds update -a
         ./scripts/feeds install -a
 
     - name: Load custom configuration
       run: |
         # [ -e files ] && mv files openwrt/files
-        # [ -e $CONFIG_FILE ] && mv $CONFIG_FILE lede/.config
+        # [ -e $CONFIG_FILE ] && mv $CONFIG_FILE immortalwrt/.config
         chmod +x $DIY_P2_SH
-        cd lede
+        cd immortalwrt
         $GITHUB_WORKSPACE/$DIY_P2_SH
         
     - name: Setup tmate session
@@ -103,12 +103,12 @@ jobs:
     - name: 复制仓库配置
       if: ${{ inputs.setup_tmate == 'false' }}
       run: |
-        sudo cp "${{ github.workspace }}/$CONFIG_FILE" ./lede/.config
+        sudo cp "${{ github.workspace }}/$CONFIG_FILE" ./immortalwrt/.config
 
     - name: 准备配置文件
       run: |
         mkdir -p upload
-        cp ./lede/.config ./upload/config.txt
+        cp ./immortalwrt/.config ./upload/config.txt
         cd upload
         echo "CONFIG=$PWD" >> $GITHUB_ENV
 
@@ -120,7 +120,7 @@ jobs:
         
     - name: 下载 dl 库，编译固件 （-j 后面是线程数，第一次编译推荐用单线程）
       run: |
-        cd lede
+        cd immortalwrt
         sudo chmod -R 777 .
         make defconfig
         make download -j8
