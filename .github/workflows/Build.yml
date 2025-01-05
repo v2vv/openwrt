@@ -97,6 +97,12 @@ jobs:
       run: |
         sudo cp "${{ github.workspace }}/$CONFIG_FILE" ./lede/.config
 
+    - name: Upload config
+      uses: actions/upload-artifact@main
+      with:
+        name: OpenWrt_firmware_${{ env.FILE_DATE }}_config
+        path: ${{ github.workspace }}/lede/.config
+
     - name: Load custom configuration
       run: |
         # [ -e files ] && mv files openwrt/files
