@@ -1,5 +1,5 @@
 
-name: Build
+name: IstoreOS Build
 
 on: 
   # push: 
