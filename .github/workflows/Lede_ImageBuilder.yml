@@ -19,7 +19,7 @@ on:
           - "false"
 
 env:
-  CONFIG_FILE: build/lede/20250106_ImageBuilder.config
+  CONFIG_FILE: build/lede/2025010602_ImageBuilder.config
   DIY_P1_SH: build/lede/diy-part1.sh
   DIY_P2_SH: build/lede/diy-part2.sh
   TZ: Asia/Shanghai
