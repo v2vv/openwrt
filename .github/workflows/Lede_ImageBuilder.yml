@@ -19,7 +19,7 @@ on:
           - "false"
 
 env:
-  CONFIG_FILE: build/lede/2025010603_ImageBuilder.config
+  CONFIG_FILE: build/lede/20250106_ImageBuilder.config
   DIY_P1_SH: build/lede/diy-part1.sh
   DIY_P2_SH: build/lede/diy-part2.sh
   TZ: Asia/Shanghai
@@ -122,7 +122,7 @@ jobs:
       run: |
         cd lede
         sudo chmod 777 .config
-        make defconfig
+        # make defconfig
         make download -j8
         make -j$(nproc) || make -j1 || make -j1 V=s
         cd bin/targets/*/*
