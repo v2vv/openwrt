@@ -1,12 +1,21 @@
-version: '3.8'
+version: '3.9'
+
+services:
+  openwrt:
+    image: openwrtorg/rootfs:x86-64 # 替换为你自己的OpenWrt镜像
+    container_name: openwrt
+    privileged: true  # 通常OpenWrt需要特权模式运行
+    networks:
+      macvlan_net:
+        ipv4_address: 192.168.1.35  # 替换为你的局域网IP段内地址
+    restart: always
 
 networks:
-  macvlan:
+  macvlan_net:
     driver: macvlan
     driver_opts:
-      parent: eth0  # 指定父接口，通常是你物理网络上的接口
-      mode: bridge  # macvlan模式，可以是bridge、private、passthrough等
+      parent: eth0  # 替换为你的宿主机物理网卡名
     ipam:
       config:
-        - subnet: 192.168.1.0/24  # 指定子网
-          gateway4: 192.168.1.1   # 指定网关
+        - subnet: 192.168.1.0/24   # 替换为你局域网的网段
+          gateway: 192.168.1.1     # 替换为你局域网的网关
