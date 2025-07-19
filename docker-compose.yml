@@ -2,7 +2,7 @@ version: '3.9'
 
 services:
   openwrt:
-    image: honyua/openwrt：latest # 替换为你自己的OpenWrt镜像
+    image: honyua/openwrt:latest # 替换为你自己的OpenWrt镜像
     container_name: openwrt
     privileged: true  # 通常OpenWrt需要特权模式运行
     networks:
