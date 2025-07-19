@@ -2,13 +2,16 @@ version: '3.9'
 
 services:
   openwrt:
-    image: honyua/openwrt:latest # 替换为你自己的OpenWrt镜像
+    image: lvhonyua/openwrt:latest
     container_name: openwrt
-    privileged: true  # 通常OpenWrt需要特权模式运行
+    restart: always
     networks:
       macvlan_net:
         ipv4_address: 192.168.1.35  # 替换为你的局域网IP段内地址
-    restart: always
+    privileged: true
+    volumes:
+      - /var/run/docker.sock:/root/docker.sock
+    command: /sbin/init
   cfnat:
     container_name: mycfnat
     image: cmliu/cfnat:latest
