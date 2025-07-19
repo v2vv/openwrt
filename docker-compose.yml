@@ -2,7 +2,7 @@ version: '3.9'
 
 services:
   openwrt:
-    image: lvhonyua/openwrt:latest
+    image: honyua/openwrt:latest
     container_name: openwrt
     restart: always
     networks:
