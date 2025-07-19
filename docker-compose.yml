@@ -1,0 +1,12 @@
+version: '3.8'
+
+networks:
+  macvlan:
+    driver: macvlan
+    driver_opts:
+      parent: eth0  # 指定父接口，通常是你物理网络上的接口
+      mode: bridge  # macvlan模式，可以是bridge、private、passthrough等
+    ipam:
+      config:
+        - subnet: 192.168.1.0/24  # 指定子网
+          gateway4: 192.168.1.1   # 指定网关
