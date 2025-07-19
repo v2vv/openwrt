@@ -7,6 +7,8 @@ services:
     restart: always
     command: /sbin/init
     privileged: true
+    tty: true
+    stdin_open: true
     volumes:
       - /var/run/docker.sock:/root/docker.sock
     networks:
